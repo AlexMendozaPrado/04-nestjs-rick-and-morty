@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "format": "npx prettier --write .",
+    "format": "prettier --write --ignore-unknown .",
     "check-format": "npx prettier --check ."
   },
   "dependencies": {
