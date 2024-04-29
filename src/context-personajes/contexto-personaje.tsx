@@ -41,11 +41,12 @@ export function ContextoFavoritosProvider({
     }
   }
   function removerPersonajeFavorito(personajeId: number) {
-    const nuevoListado = personajesFavoritos.filter(
+    setpersonajesFavoritos((state) =>{const nuevoListado = personajesFavoritos.filter(
       (personaje) => personaje.id !== personajeId,
     );
     localStorage.setItem("favoritos", JSON.stringify(nuevoListado));
-    return nuevoListado;
+    return nuevoListado;})
+    
   }
   function verificarexistenciaPersonaje(personajeId: number) {
     return personajesFavoritos.findIndex(
