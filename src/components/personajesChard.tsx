@@ -32,17 +32,16 @@ export function PersonajeCard({ personaje }: personajesChardProps) {
     
     <Link href={`/character/${personaje.id}`} passHref>
       <div className="cursor-pointer overflow-hidden rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl bg-white">
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full ">
       <Image
         loader={() => personaje.image}
         src={personaje.image}
         unoptimized
         layout="responsive"
-        width={30}
+        width={300}
         height={300}
         alt={personaje.name}
-        className="rounded-t-lg"
-      />
+        className="rounded-t-lg object-cover object-center w-full"      />
     </div>
     <div className="px-6 py-4 bg-gray-800 rounded-b-lg">
       <div className="font-bold text-xl mb-2 text-white">{personaje.name}</div>

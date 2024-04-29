@@ -82,7 +82,7 @@ export default function Home(props: PropsApi) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main >
+      <main className="container mx-auto py-36 px-8" >
         <form className="flex items-center justify-between w-full mt-6 mb-4">
           <div className="flex-1">
             <input
@@ -118,7 +118,7 @@ export default function Home(props: PropsApi) {
             </span>
           </div>
         )}
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8">
+<div className="grid lg:grid-cols-3  gap-8 p-8">
           {personajes.map((personaje) => (
             <PersonajeCard key={personaje.id} personaje={personaje} />
           ))}

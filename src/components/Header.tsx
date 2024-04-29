@@ -17,7 +17,7 @@ export default function Header({
     <div className="flex justify-center items-center py-1.5 px-6 bg-gray-800">
       <div className="flex justify-between items-center w-full max-w-4xl px-2 gap-2">
         <Image
-          src="/rick_and_morty_logo2.jpg"
+          src="/logo.png"
           alt="Rick and Morty"
           width={180}
           height={90}
