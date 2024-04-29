@@ -23,7 +23,7 @@ export function PersonajeCard({ personaje }: personajesChardProps) {
     }
 
     return (
-        <Link href={`/personajes/${personaje.id}`} passHref>
+        <Link href={`/character/${personaje.id}`} passHref>
             <div className="max-w-sm cursor-pointer overflow-hidden shadow-lg">
                 <div className="relative w-full h-72">
                     <Image

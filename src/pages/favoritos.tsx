@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { useContext } from 'react'
-import { ContextoFavorito } from '@/app/context-personajes/contexto-personaje'
+import { ContextoFavorito } from '@/context-personajes/contexto-personaje'
 import { MdOutlineArrowBackIosNew } from 'react-icons/md'
 
 export default function Favoritos() {
@@ -18,17 +18,14 @@ export default function Favoritos() {
       <div className="flex flex-col items-center justify-center min-h-screen py-8">
         <div className="flex items-center justify-between w-full max-w-2xl p-6">
           <Link href="/" passHref>
-            <a className="flex items-center gap-2 p-2 bg-blue-500 text-white rounded hover:opacity-80">
               <MdOutlineArrowBackIosNew /> Atrás
-            </a>
           </Link>
           <h2 className="text-lg text-gray-100">Tus personajes favoritos</h2>
         </div>
         <section className="w-full max-w-2xl p-6 bg-gray-900 flex flex-col items-center">
           {cantidadFavoritos > 0 ? (
             personajesFavoritos.map((personaje) => (
-              <Link href={`/character/${personaje.id}`} key={personaje.id}>
-                <a className="flex items-center w-full border-2 border-blue-500 rounded overflow-hidden bg-gray-800 my-2 hover:-translate-y-1 transition">
+              <Link   href={`/character/${personaje.id}`} key={personaje.id} className="flex items-center w-full border-2 border-blue-500 rounded overflow-hidden bg-gray-800 my-2 hover:-translate-y-1 transition">
                   <Image
                     loader={() => personaje.image}
                     src={personaje.image}
@@ -51,7 +48,6 @@ export default function Favoritos() {
                       Remover de favoritos
                     </button>
                   </div>
-                </a>
               </Link>
             ))
           ) : (

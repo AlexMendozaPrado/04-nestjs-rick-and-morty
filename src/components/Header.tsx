@@ -13,7 +13,7 @@ export default function Header({ esOscuroTemas, setIsOscuroTemas }: Headerprops)
     return (
         <div className="flex justify-center items-center py-1.5 px-6 bg-gray-800">
           <div className="flex justify-between items-center w-full max-w-4xl px-2 gap-2">
-            <Image src="/rick_and_morty_logo2.jpg" alt="Rick and Morty" width={130} height={74} />
+            <Image src="/rick_and_morty_logo2.jpg" alt="Rick and Morty" width={180} height={90} />
     
             <div className="flex justify-between max-w-[130px] w-full items-center gap-2">
               <BotonFavorito />

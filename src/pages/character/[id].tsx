@@ -8,7 +8,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { useContext } from 'react'
 
 // Context
-import { ContextoFavorito } from '../../app/context-personajes/contexto-personaje'
+import { ContextoFavorito } from '../../context-personajes/contexto-personaje'
 
 // Libs
 import axios from 'axios'
@@ -16,9 +16,9 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { MdOutlineArrowBackIosNew } from 'react-icons/md'
 
 // Types
-import { RickAndMortyCharactersInfo } from '../../app/types-ts/rick-and-morty-characters-info'
+import { RickAndMortyCharactersInfo } from '../../types-ts/rick-and-morty-characters-info'
 
-import { API_URL } from '@/index'
+import { API_URL } from '@/pages/index'
 
 interface PersonajeProps {
   personaje: RickAndMortyCharactersInfo
@@ -42,10 +42,8 @@ export default function Personaje({ personaje }: PersonajeProps) {
       </Head>
       <div className="flex flex-col items-center justify-center mt-4">
         <div className="flex items-center justify-between w-full max-w-md p-4">
-          <Link href="/" passHref>
-            <a className="flex items-center gap-2 bg-blue-500 text-white p-2 rounded hover:opacity-80">
+          <Link   href="/" passHref className="flex items-center gap-2 bg-blue-500 text-white p-2 rounded hover:opacity-80">
               <MdOutlineArrowBackIosNew /> Back
-            </a>
           </Link>
           <button
             className={`flex items-center p-2 rounded ${
