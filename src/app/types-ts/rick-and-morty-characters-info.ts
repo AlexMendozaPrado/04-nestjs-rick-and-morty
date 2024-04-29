@@ -21,13 +21,12 @@ export interface RickAndMortyCharactersInfo {
 
 }
 export interface RickAndMortyCharactersInfoResponse {
-    info: {
+    
         count: number;
         pages: number;
         next: string;
         prev: string;
-    };
-    results: RickAndMortyCharactersInfo[];
+
 }
 
 export interface restApiResponseData {
