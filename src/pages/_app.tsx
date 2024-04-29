@@ -8,6 +8,8 @@ import { defaultTheme, lightTheme } from "@/styles/themes/default";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { GlobalStyle } from "@/styles/globals";
+import '../styles/globals.css';
+
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [isDarkTheme, setIsDarkTheme] = useState(true);

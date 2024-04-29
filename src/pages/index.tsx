@@ -82,7 +82,7 @@ export default function Home(props: PropsApi) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container mx-auto px-4">
+      <main >
         <form className="flex items-center justify-between w-full mt-6 mb-4">
           <div className="flex-1">
             <input
@@ -118,13 +118,13 @@ export default function Home(props: PropsApi) {
             </span>
           </div>
         )}
-        <div className="flex flex-wrap justify-center gap-4 my-4">
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8">
           {personajes.map((personaje) => (
             <PersonajeCard key={personaje.id} personaje={personaje} />
           ))}
         </div>
-        <div className="flex items-center justify-center gap-4 my-4">
-          <button
+        <div className="flex items-center justify-center gap-4 my-8">
+          <button className="rounded-lg px-6 py-2 text-base font-medium bg-black text-yellow-400 cursor-pointer hover:bg-opacity-80 disabled:bg-gray-500 disabled:cursor-not-allowed"
             onClick={() =>
               setInfoActual((prev) => ({
                 ...prev,
@@ -132,17 +132,18 @@ export default function Home(props: PropsApi) {
               }))
             }
             disabled={deshabilitarAnterior}
-            className="bg-yellow-500 text-white rounded-lg p-2 disabled:opacity-50"
           >
             Previo
           </button>
+          <div className="flex items-center justify-center bg-black rounded-lg">
           <input
             type="text"
             disabled
             value={`${numeroPaginaActual} / ${infoActual.pages}`}
-            className="text-center bg-gray-800 text-white rounded-lg p-2 w-20"
-          />
-          <button
+            className="text-center text-yellow-400 bg-transparent w-20 py-2"
+            />
+          </div>
+          <button className="rounded px-4 py-2 text-sm bg-yellow-500 text-gray-900 cursor-pointer hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() =>
               setInfoActual((prev) => ({
                 ...prev,
@@ -150,7 +151,6 @@ export default function Home(props: PropsApi) {
               }))
             }
             disabled={deshabilitarSiguiente}
-            className="bg-blue-500 text-white rounded-lg p-2 disabled:opacity-50"
           >
             Siguiente
           </button>

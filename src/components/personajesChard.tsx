@@ -29,37 +29,42 @@ export function PersonajeCard({ personaje }: personajesChardProps) {
   };
 
   return (
-    <Link
-      href={`/character/${personaje.id}`}
-      passHref
-      className="border-2 border-green-500 rounded-lg overflow-hidden no-underline text-gray-200 bg-gray-800 relative hover:-translate-y-1 transition-all duration-200 mb-0"
-      prefetch={false}
-    >
+    
+    <Link href={`/character/${personaje.id}`} passHref>
+      <div className="cursor-pointer overflow-hidden rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl bg-white">
+    <div className="relative w-full h-full">
       <Image
         loader={() => personaje.image}
         src={personaje.image}
         unoptimized
-        width={300}
+        layout="responsive"
+        width={30}
         height={300}
         alt={personaje.name}
+        className="rounded-t-lg"
       />
-      <span className="block p-4 text-center text-lg">{personaje.name}</span>
-      <div>
-        <button
-          className="flex items-center absolute top-5 right-5 bg-gray-800 text-orange-400 rounded-md border-none p-2.5 cursor-pointer"
-          onClick={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            manejarAgregarRemoverPersonaje(personaje);
-          }}
-        >
-          {verificarexistenciaPersonaje(personaje.id) >= 0 ? (
-            <AiFillStar />
-          ) : (
-            <AiOutlineStar />
-          )}
-        </button>
-      </div>
-    </Link>
+    </div>
+    <div className="px-6 py-4 bg-gray-800 rounded-b-lg">
+      <div className="font-bold text-xl mb-2 text-white">{personaje.name}</div>
+    </div>
+    <div className="px-6 pt-4 pb-2 bg-gray-900 rounded-b-lg">
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          manejarAgregarRemoverPersonaje(personaje);
+        }}
+      >
+        {verificarexistenciaPersonaje(personaje.id) >= 0 ? (
+          <AiFillStar className="text-yellow-400" />
+        ) : (
+          <AiOutlineStar className="text-gray-400" />
+        )}
+      </button>
+    </div>
+  </div>
+</Link>
+
   );
 }

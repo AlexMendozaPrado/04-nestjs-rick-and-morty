@@ -7,8 +7,8 @@ export default function Footer() {
       <Image
         src="/rick_and_morty_logo2.jpg"
         alt="Rick and Morty"
-        width={130}
-        height={74}
+        width={230}
+        height={94}
       />
       <p className="mb-6 text-center">Alejandro Mendoza</p>
     </footer>

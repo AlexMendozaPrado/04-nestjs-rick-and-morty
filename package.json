@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest",
     "format": "prettier --write --ignore-unknown .",
     "check-format": "npx prettier --check ."
   },
@@ -15,9 +14,6 @@
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/icons-material": "^5.15.15",
-    "@mui/material": "^5.15.15",
-    "@mui/material-nextjs": "^5.15.11",
     "@radix-ui/react-dialog": "^1.0.3",
     "@types/node": "18.15.10",
     "@types/react": "^18.3.0",
@@ -35,16 +31,15 @@
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^1.2.0",
-    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
-    "@types/jest": "^29.5.0",
     "@types/styled-components": "^5.1.26",
-    "babel-jest": "^29.5.0",
+    "autoprefixer": "^10.4.19",
     "babel-plugin-styled-components": "^2.0.7",
+    "daisyui": "^4.10.2",
     "eslint": "^8.36.0",
-    "jest": "^29.5.0",
-    "jest-environment-jsdom": "^29.5.0",
+    "postcss": "^8.4.38",
     "prettier": "3.2.5",
+    "tailwindcss": "^3.4.3",
     "ts-node": "^10.9.1"
   }
 }
