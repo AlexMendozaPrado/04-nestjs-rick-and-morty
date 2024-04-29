@@ -15,12 +15,12 @@ interface ContextoinfoFavoritos{
 }
 //Props de favoritos
 interface ContextoinfoFavoritosProviderProps{  
-    hijo: ReactNode;
+    children: ReactNode;
 }
 //Contexto de favoritos
 export const ContextoFavorito= createContext({} as ContextoinfoFavoritos);
 //Provider de favoritos
-export function ContextoFavoritosProvider({hijo}:ContextoinfoFavoritosProviderProps){
+export function ContextoFavoritosProvider({children,}:ContextoinfoFavoritosProviderProps){
     const [personajesFavoritos,setpersonajesFavoritos]=useState<RickAndMortyCharactersInfo[]>([]);
     const [tema,setTema]=useState<boolean>(true);
     
@@ -62,9 +62,10 @@ setpersonajesFavoritos(JSON.parse(personajesFavoritosGuardados));
             removerPersonajeFavorito,
             cambiarTema
         }}>
-            {hijo}
+            {children}
         </ContextoFavorito.Provider>
     )
+
 }
 
 

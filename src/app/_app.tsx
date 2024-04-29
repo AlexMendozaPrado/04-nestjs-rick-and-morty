@@ -1,7 +1,34 @@
 import type { AppProps } from 'next/app'
+import { useState } from 'react'
+import { ContextoFavoritosProvider } from './context-personajes/contexto-personaje'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
+import { ThemeProvider } from 'styled-components'
+import { defaultTheme, lightTheme } from '@/styles/themes/default'
+import Footer from '@/app/components/Footer'
+import Header from '@/app/components/Header'
+import { GlobalStyle } from '@/styles/globals'
+
+
+
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-    return( <Component {...pageProps} />
+    const [isDarkTheme, setIsDarkTheme] = useState(true)
 
-)
+    return( 
+        <ContextoFavoritosProvider>
+         <ThemeProvider theme={isDarkTheme ? defaultTheme : lightTheme}>
+            <>
+            <Header esOscuroTemas={isDarkTheme} setIsOscuroTemas={setIsDarkTheme}/>
+                <Component {...pageProps} />
+                <Footer/>
+            </>
+            <ToastContainer />
+            <GlobalStyle/>
+            </ThemeProvider>
+        </ContextoFavoritosProvider>
+    
+     )
+
+
   }
