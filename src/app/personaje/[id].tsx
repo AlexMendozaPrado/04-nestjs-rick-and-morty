@@ -4,126 +4,128 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
-import{useContext} from 'react'
+// React
+import { useContext } from 'react'
+
+// Context
+import { ContextoFavorito } from '../../app/context-personajes/contexto-personaje'
+
+// Libs
 import axios from 'axios'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { MdOutlineArrowBackIosNew } from 'react-icons/md'
-import { ContextoFavorito } from '../../app/context-personajes/contexto-personaje'
+
+// Types
 import { RickAndMortyCharactersInfo } from '../../app/types-ts/rick-and-morty-characters-info'
+
 import { API_URL } from '@/index'
 
 interface PersonajeProps {
-    personaje: RickAndMortyCharactersInfo
+  personaje: RickAndMortyCharactersInfo
 }
 
 export default function Personaje({ personaje }: PersonajeProps) {
-    //contexto de favoritos
-    const { agregarPersonajeFavorito, removerPersonajeFavorito, verificarexistenciaPersonaje } = 
-    useContext(ContextoFavorito);
-    //funcion para manejar el agregar y remover personajes
-    const manejarAgregarRemoverPersonaje = (personaje: RickAndMortyCharactersInfo) => {
-        if (verificarexistenciaPersonaje(personaje.id) >= 0) {
-            removerPersonajeFavorito(personaje.id);
-        } else {
-            agregarPersonajeFavorito(personaje);
-        }
+  const { agregarPersonajeFavorito, removerPersonajeFavorito, verificarexistenciaPersonaje } = useContext(ContextoFavorito);
+
+  const manejarAgregarRemoverPersonaje = (personaje: RickAndMortyCharactersInfo) => {
+    if (verificarexistenciaPersonaje(personaje.id) >= 0) {
+      removerPersonajeFavorito(personaje.id);
+    } else {
+      agregarPersonajeFavorito(personaje);
     }
+  }
 
-    return (
-        <>
-        <Head>
-            <title> Rick y Morty</title>
-        </Head>
-        <div>
-            <div>
-                <Link href="/" passHref>
-                    <MdOutlineArrowBackIosNew/> Back
-                </Link>
-                <button
-                onClick={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    manejarAgregarRemoverPersonaje(personaje);
-
-                }}
-                >
-                    {verificarexistenciaPersonaje(personaje.id) >= 0 ? (<AiFillStar />) :( <AiOutlineStar />)}
-
-                </button>
-            </div>
-            <Image
-            loader={() => personaje.image}
-            src={personaje.image}
-            unoptimized
-            width={300}
-            height={300}
-            alt={personaje.name}
-            />
-            <h1>{personaje.name}</h1>
-            {personaje.type && (
-          <div>
-            <strong>Tipo</strong>
-            <span>{personaje.type}</span>
+  return (
+    <>
+      <Head>
+        <title>Rick y Morty - {personaje.name}</title>
+      </Head>
+      <div className="flex flex-col items-center justify-center mt-4">
+        <div className="flex items-center justify-between w-full max-w-md p-4">
+          <Link href="/" passHref>
+            <a className="flex items-center gap-2 bg-blue-500 text-white p-2 rounded hover:opacity-80">
+              <MdOutlineArrowBackIosNew /> Back
+            </a>
+          </Link>
+          <button
+            className={`flex items-center p-2 rounded ${
+              verificarexistenciaPersonaje(personaje.id) >= 0 ? 'bg-yellow-400' : 'bg-gray-400'
+            } hover:opacity-80`}
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              manejarAgregarRemoverPersonaje(personaje);
+            }}
+          >
+            {verificarexistenciaPersonaje(personaje.id) >= 0 ? <AiFillStar /> : <AiOutlineStar />}
+          </button>
+        </div>
+        <Image
+          src={personaje.image}
+          unoptimized
+          width={300}
+          height={300}
+          alt={personaje.name}
+          className="my-4"
+        />
+        <h1 className="text-2xl font-bold text-center my-2">{personaje.name}</h1>
+        {personaje.type && (
+          <div className="bg-gray-800 text-white p-4 rounded-lg my-2">
+            <strong className="font-bold">Tipo:</strong> <span>{personaje.type}</span>
           </div>
         )}
         {personaje.origin.name && (
-          <div>
-            <strong>Nombre</strong>
-            <span>{personaje.origin.name}</span>
+          <div className="bg-gray-800 text-white p-4 rounded-lg my-2">
+            <strong className="font-bold">Nombre:</strong> <span>{personaje.origin.name}</span>
           </div>
         )}
         {personaje.gender && (
-          <div>
-            <strong>genero</strong>
-            <span>{personaje.gender}</span>
+          <div className="bg-gray-800 text-white p-4 rounded-lg my-2">
+            <strong className="font-bold">Género:</strong> <span>{personaje.gender}</span>
           </div>
         )}
         {personaje.status && (
-          <div>
-            <strong>status</strong>
-            <span>{personaje.type}</span>
+          <div className="bg-gray-800 text-white p-4 rounded-lg my-2">
+            <strong className="font-bold">Estado:</strong> <span>{personaje.status}</span>
           </div>
         )}
         {personaje.species && (
-          <div>
-            <strong>Especie</strong>
-            <span>{personaje.species}</span>
+          <div className="bg-gray-800 text-white p-4 rounded-lg my-2">
+            <strong className="font-bold">Especie:</strong> <span>{personaje.species}</span>
           </div>
         )}
-
-        </div>    
-        </>
-    )
+      </div>
+    </>
+  );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    return{
-        paths:[{params:{id:'1'}}],
-        fallback: true
-    }
-}
+  // You need to replace this part with your actual data-fetching logic
+  return {
+    paths: [{ params: { id: '1' } }],
+    fallback: true
+  };
+};
 
-export const getStaticProps: GetStaticProps = async ({params}) => {
-    const personajeId = params?.id;
-    const personaje = await axios.get<RickAndMortyCharactersInfo>(`${API_URL}/${personajeId}`)
-    .then(({data})=> {return data})
-    .catch(()=>{
-        return null
-    })
-    if(!personaje){
-        return{
-            redirect:{
-                destination:'/',
-                permanent:false
-        },
-    }   
-}
-return{
-    props:{
-        personaje
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const personajeId = params?.id;
+  const personaje = await axios.get<RickAndMortyCharactersInfo>(`${API_URL}/${personajeId}`)
+    .then(({ data }) => data)
+    .catch(() => null);
+
+  if (!personaje) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    };
+  }
+
+  return {
+    props: {
+      personaje
     },
-    revalidate: 60 * 60 * 2,//cada 2 horas
-}
-}
-
-
+    revalidate: 60 * 60 * 2  // 2 hours
+  };
+};

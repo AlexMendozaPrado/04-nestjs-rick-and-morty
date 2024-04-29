@@ -2,60 +2,65 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import {useContext} from 'react'
-import {ContextoFavorito} from '@/app/context-personajes/contexto-personaje'
+import { useContext } from 'react'
+import { ContextoFavorito } from '@/app/context-personajes/contexto-personaje'
 import { MdOutlineArrowBackIosNew } from 'react-icons/md'
 
 export default function Favoritos() {
-const {personajesFavoritos,removerPersonajeFavorito} = useContext(ContextoFavorito)
-const cantidadFavoritos = personajesFavoritos.length
-return(
+  const { personajesFavoritos, removerPersonajeFavorito } = useContext(ContextoFavorito)
+  const cantidadFavoritos = personajesFavoritos.length
+
+  return (
     <>
-    <Head>
-        <title> Rick y Morty</title>
-    </Head>
-    <div>
-        <div>
-            <Link href="/" passHref >
-                <MdOutlineArrowBackIosNew/> atras
-            </Link>
-            <h2> Tus persoanjes favoritos</h2>
+      <Head>
+        <title>Rick y Morty - Favoritos</title>
+      </Head>
+      <div className="flex flex-col items-center justify-center min-h-screen py-8">
+        <div className="flex items-center justify-between w-full max-w-2xl p-6">
+          <Link href="/" passHref>
+            <a className="flex items-center gap-2 p-2 bg-blue-500 text-white rounded hover:opacity-80">
+              <MdOutlineArrowBackIosNew /> Atrás
+            </a>
+          </Link>
+          <h2 className="text-lg text-gray-100">Tus personajes favoritos</h2>
         </div>
-        <section>
-            {cantidadFavoritos > 0 ? (<div>
-                <p>  Lista de favoritos vacia </p>
-            </div>):(
-                <>
-                {
-                    personajesFavoritos.map((personaje)=>(
-                        <Link href={`/character/${personaje.id}`} key={personaje.id}>
-                            <Image
-                            loader={() => personaje.image}
-                            src={personaje.image}
-                            unoptimized
-                            width={85}
-                            height={85}
-                            alt={personaje.name}
-                            />
-                            <div>
-                            <p>{personaje.name}</p>
-                            <button onClick={(event) =>{
-                                event.preventDefault()
-                                event.stopPropagation()
-                                 removerPersonajeFavorito(personaje.id)
-
-                            }}>
-                                Remover de favoritos
-                                </button>
-                                </div>
-
-                        </Link>
-                    )) }
-                </>
-            )}
+        <section className="w-full max-w-2xl p-6 bg-gray-900 flex flex-col items-center">
+          {cantidadFavoritos > 0 ? (
+            personajesFavoritos.map((personaje) => (
+              <Link href={`/character/${personaje.id}`} key={personaje.id}>
+                <a className="flex items-center w-full border-2 border-blue-500 rounded overflow-hidden bg-gray-800 my-2 hover:-translate-y-1 transition">
+                  <Image
+                    loader={() => personaje.image}
+                    src={personaje.image}
+                    unoptimized
+                    width={85}
+                    height={85}
+                    alt={personaje.name}
+                    className="rounded"
+                  />
+                  <div className="flex flex-col justify-between p-4">
+                    <p className="text-white">{personaje.name}</p>
+                    <button
+                      onClick={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        removerPersonajeFavorito(personaje.id);
+                      }}
+                      className="text-orange-400 bg-transparent mt-2 cursor-pointer"
+                    >
+                      Remover de favoritos
+                    </button>
+                  </div>
+                </a>
+              </Link>
+            ))
+          ) : (
+            <div className="flex items-center justify-center p-6 h-full w-full">
+              <p className="text-white">Lista de favoritos vacía.</p>
+            </div>
+          )}
         </section>
-
-    </div>
+      </div>
     </>
-)
+  )
 }
