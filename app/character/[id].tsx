@@ -8,7 +8,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { useContext } from 'react'
 
 // Context
-import { ContextoFavorito } from '../../context-personajes/contexto-personaje'
+import { ContextoFavorito } from '../context-personajes/page'
 
 // Libs
 import axios from 'axios'
@@ -16,9 +16,9 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { MdOutlineArrowBackIosNew } from 'react-icons/md'
 
 // Types
-import { RickAndMortyCharactersInfo } from '../../types-ts/rick-and-morty-characters-info'
+import { RickAndMortyCharactersInfo } from '../types-ts/rick-and-morty-characters-info'
 
-import { API_URL } from '@/pages/index'
+import { API_URL } from '../page'
 
 interface PersonajeProps {
   personaje: RickAndMortyCharactersInfo

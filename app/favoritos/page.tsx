@@ -1,9 +1,10 @@
+"use client"
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import { useContext } from 'react'
-import { ContextoFavorito } from '@/context-personajes/contexto-personaje'
+import { ContextoFavorito } from '../context-personajes/page'
 import { MdOutlineArrowBackIosNew } from 'react-icons/md'
 
 export default function Favoritos() {

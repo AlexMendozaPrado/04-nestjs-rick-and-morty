@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect, createContext, ReactNode } from 'react'
 
 //Type  de personaje
