@@ -3,5 +3,5 @@ const nextConfig = {
     styledComponents: true,
   },
   reactStrictMode: true,
-};
-export default nextConfig;
+}
+export default nextConfig

@@ -1,35 +1,35 @@
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
+import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { useContext } from "react";
-import { ContextoFavorito } from "@/context-personajes/contexto-personaje";
-import { MdOutlineArrowBackIosNew } from "react-icons/md";
+import { useContext } from 'react'
+import { ContextoFavorito } from '@/context-personajes/contexto-personaje'
+import { MdOutlineArrowBackIosNew } from 'react-icons/md'
 
 export default function Favoritos() {
   const { personajesFavoritos, removerPersonajeFavorito } =
-    useContext(ContextoFavorito);
-  const cantidadFavoritos = personajesFavoritos.length;
+    useContext(ContextoFavorito)
+  const cantidadFavoritos = personajesFavoritos.length
 
   return (
     <>
       <Head>
         <title>Rick y Morty - Favoritos</title>
       </Head>
-      <div className="flex flex-col items-center justify-center min-h-screen py-8">
-        <div className="flex items-center justify-between w-full max-w-2xl p-6">
-          <Link href="/" passHref>
+      <div className='flex min-h-screen flex-col items-center justify-center py-8'>
+        <div className='flex w-full max-w-2xl items-center justify-between p-6'>
+          <Link href='/' passHref>
             <MdOutlineArrowBackIosNew /> Atrás
           </Link>
-          <h2 className="text-lg text-gray-100">Tus personajes favoritos</h2>
+          <h2 className='text-lg text-gray-100'>Tus personajes favoritos</h2>
         </div>
-        <section className="w-full max-w-2xl p-6 bg-gray-900 flex flex-col items-center">
+        <section className='flex w-full max-w-2xl flex-col items-center bg-gray-900 p-6'>
           {cantidadFavoritos > 0 ? (
             personajesFavoritos.map((personaje) => (
               <Link
                 href={`/character/${personaje.id}`}
                 key={personaje.id}
-                className="flex items-center w-full border-2 border-blue-500 rounded overflow-hidden bg-gray-800 my-2 hover:-translate-y-1 transition"
+                className='my-2 flex w-full items-center overflow-hidden rounded border-2 border-blue-500 bg-gray-800 transition hover:-translate-y-1'
               >
                 <Image
                   loader={() => personaje.image}
@@ -38,17 +38,17 @@ export default function Favoritos() {
                   width={85}
                   height={85}
                   alt={personaje.name}
-                  className="rounded"
+                  className='rounded'
                 />
-                <div className="flex flex-col justify-between p-4">
-                  <p className="text-white">{personaje.name}</p>
+                <div className='flex flex-col justify-between p-4'>
+                  <p className='text-white'>{personaje.name}</p>
                   <button
                     onClick={(event) => {
-                      event.preventDefault();
-                      event.stopPropagation();
-                      removerPersonajeFavorito(personaje.id);
+                      event.preventDefault()
+                      event.stopPropagation()
+                      removerPersonajeFavorito(personaje.id)
                     }}
-                    className="text-orange-400 bg-transparent mt-2 cursor-pointer"
+                    className='mt-2 cursor-pointer bg-transparent text-orange-400'
                   >
                     Remover de favoritos
                   </button>
@@ -56,12 +56,12 @@ export default function Favoritos() {
               </Link>
             ))
           ) : (
-            <div className="flex items-center justify-center p-6 h-full w-full">
-              <p className="text-white">Lista de favoritos vacía.</p>
+            <div className='flex h-full w-full items-center justify-center p-6'>
+              <p className='text-white'>Lista de favoritos vacía.</p>
             </div>
           )}
         </section>
       </div>
     </>
-  );
+  )
 }

@@ -1,66 +1,67 @@
-import { useState, useEffect, createContext, ReactNode } from "react";
+import { useState, useEffect, createContext, ReactNode } from 'react'
 
 //Type  de personaje
-import { RickAndMortyCharactersInfo } from "../types-ts/rick-and-morty-characters-info";
+import { RickAndMortyCharactersInfo } from '../types-ts/rick-and-morty-characters-info'
 
 //Contexto de favoritos
 interface ContextoinfoFavoritos {
-  tema: boolean;
-  personajesFavoritos: RickAndMortyCharactersInfo[];
-  agregarPersonajeFavorito: (personaje: RickAndMortyCharactersInfo) => void;
-  verificarexistenciaPersonaje: (personaje: number) => number;
-  removerPersonajeFavorito: (personajeId: number) => void;
-  cambiarTema: () => void;
+  tema: boolean
+  personajesFavoritos: RickAndMortyCharactersInfo[]
+  agregarPersonajeFavorito: (personaje: RickAndMortyCharactersInfo) => void
+  verificarexistenciaPersonaje: (personaje: number) => number
+  removerPersonajeFavorito: (personajeId: number) => void
+  cambiarTema: () => void
 }
 //Props de favoritos
 interface ContextoinfoFavoritosProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 //Contexto de favoritos
-export const ContextoFavorito = createContext({} as ContextoinfoFavoritos);
+export const ContextoFavorito = createContext({} as ContextoinfoFavoritos)
 //Provider de favoritos
 export function ContextoFavoritosProvider({
   children,
 }: ContextoinfoFavoritosProviderProps) {
   const [personajesFavoritos, setpersonajesFavoritos] = useState<
     RickAndMortyCharactersInfo[]
-  >([]);
-  const [tema, setTema] = useState<boolean>(true);
+  >([])
+  const [tema, setTema] = useState<boolean>(true)
 
   function cambiarTema() {
-    setTema(!tema);
+    setTema(!tema)
   }
   function agregarPersonajeFavorito(personaje: RickAndMortyCharactersInfo) {
-    const verificarExistencia = verificarexistenciaPersonaje(personaje.id);
+    const verificarExistencia = verificarexistenciaPersonaje(personaje.id)
     if (verificarExistencia < 0) {
-      setpersonajesFavoritos((state) => [...state, personaje]);
+      setpersonajesFavoritos((state) => [...state, personaje])
       localStorage.setItem(
-        "favoritos",
+        'favoritos',
         JSON.stringify([...personajesFavoritos, personaje]),
-      );
+      )
     }
   }
   function removerPersonajeFavorito(personajeId: number) {
-    setpersonajesFavoritos((state) =>{const nuevoListado = personajesFavoritos.filter(
-      (personaje) => personaje.id !== personajeId,
-    );
-    localStorage.setItem("favoritos", JSON.stringify(nuevoListado));
-    return nuevoListado;})
-    
+    setpersonajesFavoritos((state) => {
+      const nuevoListado = personajesFavoritos.filter(
+        (personaje) => personaje.id !== personajeId,
+      )
+      localStorage.setItem('favoritos', JSON.stringify(nuevoListado))
+      return nuevoListado
+    })
   }
   function verificarexistenciaPersonaje(personajeId: number) {
     return personajesFavoritos.findIndex(
       (personaje) => personaje.id === personajeId,
-    );
+    )
   }
   //useEffect para guardar en localstorage
   useEffect(() => {
-    const personajesFavoritosGuardados = localStorage.getItem("favoritos");
+    const personajesFavoritosGuardados = localStorage.getItem('favoritos')
     if (!personajesFavoritosGuardados) {
-      return;
+      return
     }
-    setpersonajesFavoritos(JSON.parse(personajesFavoritosGuardados));
-  }, []);
+    setpersonajesFavoritos(JSON.parse(personajesFavoritosGuardados))
+  }, [])
 
   return (
     <ContextoFavorito.Provider
@@ -75,5 +76,5 @@ export function ContextoFavoritosProvider({
     >
       {children}
     </ContextoFavorito.Provider>
-  );
+  )
 }
