@@ -4,10 +4,10 @@ import { ContextoFavoritosProvider } from "../context-personajes/contexto-person
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
-import { defaultTheme, lightTheme } from "@/styles/themes/default";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import { GlobalStyle } from "@/styles/globals";
+import { defaultTheme, lightTheme } from "../styles/themes/default";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import { GlobalStyle } from "../styles/globals";
 import '../styles/globals.css';
 
 

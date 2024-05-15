@@ -18,7 +18,7 @@ import { MdOutlineArrowBackIosNew } from "react-icons/md";
 // Types
 import { RickAndMortyCharactersInfo } from "../../types-ts/rick-and-morty-characters-info";
 
-import { API_URL } from "@/pages/index";
+import { API_URL } from "../index";
 
 interface PersonajeProps {
   personaje: RickAndMortyCharactersInfo;

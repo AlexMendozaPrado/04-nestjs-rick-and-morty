@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useContext } from "react";
-import { ContextoFavorito } from "@/context-personajes/contexto-personaje";
+import { ContextoFavorito } from "../context-personajes/contexto-personaje";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 
 export default function Favoritos() {
