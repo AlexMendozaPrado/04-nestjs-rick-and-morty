@@ -2,7 +2,6 @@
   "name": "04-nestjs-rick-and-morty",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "npx next dev",
     "build": "next build",
