@@ -2,6 +2,7 @@
   "name": "04-nestjs-rick-and-morty",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "npx next dev",
     "build": "next build",
@@ -10,7 +11,7 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write --ignore-unknown .",
     "check-format": "npx prettier --check .",
-    "prepare": "cd . && husky 04-nestjs-rick-and-morty-2/.husky|| true"
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
@@ -51,5 +52,10 @@
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.3",
     "ts-node": "^10.9.1"
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.ts": "eslint --fix",
+    "*.json": "prettier --write"
   }
 }
