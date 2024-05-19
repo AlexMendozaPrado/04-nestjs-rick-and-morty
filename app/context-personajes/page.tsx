@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { useState, useEffect, createContext, ReactNode } from 'react'
 
 //Type  de personaje
@@ -42,7 +42,7 @@ export function ContextoFavoritosProvider({
     }
   }
   function removerPersonajeFavorito(personajeId: number) {
-    setpersonajesFavoritos((state) => {
+    setpersonajesFavoritos(() => {
       const nuevoListado = personajesFavoritos.filter(
         (personaje) => personaje.id !== personajeId,
       )

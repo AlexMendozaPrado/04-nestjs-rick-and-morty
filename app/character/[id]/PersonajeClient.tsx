@@ -1,30 +1,20 @@
-// Next
+// app/character/[id]/PersonajeClient.tsx
+'use client'
+
+import { useContext } from 'react'
 import Image from 'next/image'
 import Head from 'next/head'
 import Link from 'next/link'
-import { GetStaticPaths, GetStaticProps } from 'next'
-
-// React
-import { useContext } from 'react'
-
-// Context
-import { ContextoFavorito } from '../context-personajes/page'
-
-// Libs
-import axios from 'axios'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { MdOutlineArrowBackIosNew } from 'react-icons/md'
+import { ContextoFavorito } from '../../context-personajes/page'
+import { RickAndMortyCharactersInfo } from '../../types-ts/rick-and-morty-characters-info'
 
-// Types
-import { RickAndMortyCharactersInfo } from '../types-ts/rick-and-morty-characters-info'
-
-import { API_URL } from '../page'
-
-interface PersonajeProps {
+interface PersonajeClientProps {
   personaje: RickAndMortyCharactersInfo
 }
 
-export default function Personaje({ personaje }: PersonajeProps) {
+export default function PersonajeClient({ personaje }: PersonajeClientProps) {
   const {
     agregarPersonajeFavorito,
     removerPersonajeFavorito,
@@ -50,7 +40,6 @@ export default function Personaje({ personaje }: PersonajeProps) {
         <div className='flex w-full max-w-md items-center justify-between p-4'>
           <Link
             href='/'
-            passHref
             className='flex items-center gap-2 rounded bg-blue-500 p-2 text-white hover:opacity-80'
           >
             <MdOutlineArrowBackIosNew /> Back
@@ -118,36 +107,4 @@ export default function Personaje({ personaje }: PersonajeProps) {
       </div>
     </>
   )
-}
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  // You need to replace this part with your actual data-fetching logic
-  return {
-    paths: [{ params: { id: '1' } }],
-    fallback: true,
-  }
-}
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const personajeId = params?.id
-  const personaje = await axios
-    .get<RickAndMortyCharactersInfo>(`${API_URL}/${personajeId}`)
-    .then(({ data }) => data)
-    .catch(() => null)
-
-  if (!personaje) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
-
-  return {
-    props: {
-      personaje,
-    },
-    revalidate: 60 * 60 * 2, // 2 hours
-  }
 }

@@ -1,5 +1,5 @@
 // app/layout.tsx
-"use client"
+'use client'
 import { ReactNode, useState } from 'react'
 import { ContextoFavoritosProvider } from './context-personajes/page' // Asegúrate de que la ruta es correcta
 import 'react-toastify/dist/ReactToastify.css'
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: LayoutProps) {
   const [isDarkTheme, setIsDarkTheme] = useState(true)
 
   return (
-    <html lang="en">
+    <html lang='en'>
       <body>
         <ContextoFavoritosProvider>
           <ThemeProvider theme={isDarkTheme ? defaultTheme : lightTheme}>

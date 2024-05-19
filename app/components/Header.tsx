@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import Image from 'next/image'
 import { BotonFavorito } from './BotonFavorito'
 
