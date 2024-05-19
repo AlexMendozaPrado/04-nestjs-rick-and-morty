@@ -1,6 +1,7 @@
 // Archivo: BotonFavorito.tsx
+'use client'
 import { useContext } from 'react'
-import { ContextoFavorito } from '../context-personajes/contexto-personaje'
+import { ContextoFavorito } from '../context-personajes/page'
 import { AiFillStar } from 'react-icons/ai'
 import Link from 'next/link'
 

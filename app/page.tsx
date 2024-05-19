@@ -1,19 +1,16 @@
+// app/page.tsx
+'use client'
+import { useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import axios from 'axios'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { IoSearch, IoCloseSharp } from 'react-icons/io5'
-
-import Head from 'next/head'
-import { PersonajeCard } from '../components/personajesChard'
 import {
   RickAndMortyCharactersInfo,
   restApiResponseData,
-} from '../types-ts/rick-and-morty-characters-info'
-
-interface PropsApi {
-  response: restApiResponseData
-}
+} from './types-ts/rick-and-morty-characters-info'
+import { PersonajeCard } from './components/personajesChard'
+import Head from 'next/head'
 
 interface InfoActual {
   count: number
@@ -29,19 +26,14 @@ interface infoBusqueda {
 
 export const API_URL = 'https://rickandmortyapi.com/api/character'
 
-export default function Home(props: PropsApi) {
-  const { info, results = [] } = props.response
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<infoBusqueda>()
+export default function Home() {
   const [filtrado, setFiltrado] = useState<string>('')
-  const [personajes, setPersonajes] =
-    useState<RickAndMortyCharactersInfo[]>(results)
+  const [personajes, setPersonajes] = useState<RickAndMortyCharactersInfo[]>([])
   const [infoActual, setInfoActual] = useState<InfoActual>({
-    ...info,
+    count: 0,
+    pages: 0,
+    next: null,
+    prev: null,
     current: API_URL,
   })
 
@@ -52,27 +44,36 @@ export default function Home(props: PropsApi) {
     ? Number(new URL(current).searchParams.get('page'))
     : 1
 
+  const fetchData = async (url: string) => {
+    const response = await axios
+      .get<restApiResponseData>(url)
+      .then(({ data }) => data)
+      .catch(() => {
+        toast.error('Error al obtener los datos')
+        return null
+      })
+    if (response) {
+      setInfoActual({
+        ...response.info,
+        current: url,
+      })
+      setPersonajes([...response.results])
+    }
+  }
+
+  useEffect(() => {
+    fetchData(API_URL)
+  }, [])
+
   useEffect(() => {
     if (current === API_URL) return
-
-    async function cambioPagina() {
-      const response = await axios
-        .get<restApiResponseData>(current)
-        .then(({ data }) => data)
-        .catch(() => {
-          toast.error('Error al obtener los datos')
-          return null
-        })
-      if (response) {
-        setInfoActual({
-          ...response.info,
-          current,
-        })
-        setPersonajes([...response.results])
-      }
-    }
-    cambioPagina()
+    fetchData(current)
   }, [current])
+
+  const {
+    register,
+    formState: { errors },
+  } = useForm<infoBusqueda>()
 
   return (
     <>
@@ -160,16 +161,4 @@ export default function Home(props: PropsApi) {
       </main>
     </>
   )
-}
-
-export async function getStaticProps() {
-  const response = await axios
-    .get<restApiResponseData>(API_URL)
-    .then(({ data }) => data)
-  return {
-    props: {
-      response,
-    },
-    revalidate: 60 * 60 * 2, // every 2 hours
-  }
 }

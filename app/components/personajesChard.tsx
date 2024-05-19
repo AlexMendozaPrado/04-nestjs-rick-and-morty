@@ -1,7 +1,8 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useContext } from 'react'
-import { ContextoFavorito } from '../context-personajes/contexto-personaje'
+import { ContextoFavorito } from '../context-personajes/page'
 import { RickAndMortyCharactersInfo } from '../types-ts/rick-and-morty-characters-info'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 
@@ -9,15 +10,28 @@ interface personajesChardProps {
   personaje: RickAndMortyCharactersInfo
 }
 
+// personajesChard.tsx
 export function PersonajeCard({ personaje }: personajesChardProps) {
-  // Contexto de favoritos
   const {
     agregarPersonajeFavorito,
     removerPersonajeFavorito,
     verificarexistenciaPersonaje,
   } = useContext(ContextoFavorito)
 
-  // Función para manejar el agregar y remover personajes
+  console.log('Contexto:', {
+    agregarPersonajeFavorito,
+    removerPersonajeFavorito,
+    verificarexistenciaPersonaje,
+  })
+
+  if (
+    !agregarPersonajeFavorito ||
+    !removerPersonajeFavorito ||
+    !verificarexistenciaPersonaje
+  ) {
+    throw new Error('ContextoFavorito no está definido correctamente.')
+  }
+
   const manejarAgregarRemoverPersonaje = (
     personaje: RickAndMortyCharactersInfo,
   ) => {
@@ -29,7 +43,7 @@ export function PersonajeCard({ personaje }: personajesChardProps) {
   }
 
   return (
-    <Link href={`/character/${personaje.id}`} passHref>
+    <Link href={`/character/${personaje.id}`}>
       <div className='transform cursor-pointer overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 ease-in-out hover:-translate-y-1 hover:shadow-2xl'>
         <div className='relative h-full w-full '>
           <Image
