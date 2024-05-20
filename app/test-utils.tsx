@@ -1,9 +1,8 @@
 // src/test-utils.tsx
 import React, { ReactNode } from 'react'
 import { render, RenderOptions } from '@testing-library/react'
-import { ContextoFavorito } from './context-personajes/contexto-personaje'
+import { ContextoFavorito } from './context-personajes/page'
 import { vi } from 'vitest'
-
 const mockContextValue = {
   personajesFavoritos: [],
   agregarPersonajeFavorito: vi.fn(),

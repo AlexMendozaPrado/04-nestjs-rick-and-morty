@@ -1,5 +1,5 @@
-import { render, screen, fireEvent, waitFor } from '../test-utils'
-import Home from './index'
+import { render, screen, fireEvent, waitFor } from './test-utils'
+import Home from './page'
 import { describe, it, expect, vi } from 'vitest'
 import axios from 'axios'
 import { toast } from 'react-toastify'
@@ -43,14 +43,22 @@ const newPageResponse = {
 }
 
 describe('Home', () => {
-  it('renders character cards', () => {
+  it('renders character cards', async () => {
+    // Configura el mock de Axios para devolver la respuesta simulada
+    axios.get.mockResolvedValueOnce({ data: mockResponse })
+
+    console.log('Rendering Home with mockResponse:', mockResponse)
+
     render(<Home response={mockResponse} />)
+    screen.debug() // Ver el DOM renderizado
 
-    const rickElement = screen.getByText(/Rick Sanchez/i)
-    expect(rickElement).toBeInTheDocument()
+    await waitFor(() => {
+      const rickElement = screen.getByText(/Rick Sanchez/i)
+      expect(rickElement).toBeInTheDocument()
 
-    const mortyElement = screen.getByText(/Morty Smith/i)
-    expect(mortyElement).toBeInTheDocument()
+      const mortyElement = screen.getByText(/Morty Smith/i)
+      expect(mortyElement).toBeInTheDocument()
+    })
   })
 
   it('handles pagination correctly', async () => {

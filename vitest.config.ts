@@ -7,12 +7,12 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    setupFiles: 'src/helpers/setupTests.ts',
+    setupFiles: 'app/helpers/setupTests.ts',
     environment: 'jsdom',
     coverage: {
       // files to include in metrics for coverage
       // add your folders, adjust based on yor structure
-      include: ['src/components/**/*.{ts,tsx}', 'src/helpers/**/*.{ts,tsx}'],
+      include: ['app/**/*.{ts,tsx}', 'src/helpers/**/*.{ts,tsx}'],
       // if you want to exclude some files
       exclude: [],
       reporter: ['html', 'text-summary'],
@@ -27,7 +27,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // add this section if you are using an alias
-      '@': path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, 'app'),
     },
   },
 })

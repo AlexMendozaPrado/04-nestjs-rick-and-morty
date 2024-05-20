@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '../test-utils'
-import Favoritos from './favoritos'
+import Favoritos from './page'
 import { describe, it, expect } from 'vitest'
-import { ContextoFavorito } from '../context-personajes/contexto-personaje'
+import { ContextoFavorito } from '../context-personajes/page'
 
 const mockContextValue = {
   personajesFavoritos: [

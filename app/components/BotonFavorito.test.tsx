@@ -1,7 +1,7 @@
 import { render, screen } from '../test-utils' // Usa la función de utilidad
 import { BotonFavorito } from './BotonFavorito'
 import { describe, it, expect } from 'vitest'
-import { ContextoFavorito } from '../context-personajes/contexto-personaje'
+import { ContextoFavorito } from '../context-personajes/page'
 
 const mockContextValue = {
   personajesFavoritos: [{ id: 1, name: 'Rick Sanchez', image: '/rick.png' }],

@@ -1,9 +1,9 @@
-// app/character/[id]/page.tsx
+'use client'
+import { useState, useEffect } from 'react'
 import { notFound } from 'next/navigation'
 import { RickAndMortyCharactersInfo } from '../../types-ts/rick-and-morty-characters-info'
 import PersonajeClient from './PersonajeClient'
 
-// Define API_URL aquí para asegurarte de que no se accede directamente desde el lado del cliente
 const API_URL = 'https://rickandmortyapi.com/api/character'
 
 interface PersonajeProps {
@@ -12,16 +12,7 @@ interface PersonajeProps {
   }
 }
 
-export async function generateStaticParams() {
-  const response = await fetch(API_URL)
-  const data = await response.json()
-  const paths = data.results.map((character: RickAndMortyCharactersInfo) => ({
-    id: character.id.toString(),
-  }))
-  return paths
-}
-
-async function fetchCharacter(id: string) {
+export async function fetchCharacter(id: string) {
   const res = await fetch(`${API_URL}/${id}`)
   if (!res.ok) {
     return null
@@ -30,11 +21,28 @@ async function fetchCharacter(id: string) {
   return character
 }
 
-export default async function PersonajePage({ params }: PersonajeProps) {
-  const personaje = await fetchCharacter(params.id)
-  if (!personaje) {
-    notFound()
+export default function PersonajePage({ params }: PersonajeProps) {
+  const [personaje, setPersonaje] = useState<RickAndMortyCharactersInfo | null>(
+    null,
+  )
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function getCharacter() {
+      const character = await fetchCharacter(params.id)
+      if (!character) {
+        notFound()
+      }
+      setPersonaje(character)
+      setLoading(false)
+    }
+
+    getCharacter()
+  }, [params.id])
+
+  if (loading) {
+    return <div>Loading...</div>
   }
 
-  return <PersonajeClient personaje={personaje} />
+  return personaje ? <PersonajeClient personaje={personaje} /> : null
 }
