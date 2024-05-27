@@ -28,7 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "tailwind.config.js",
-    "drizzle.config.js"
+    "drizzle.config.ts"
   ],
   "exclude": ["node_modules"]
 }
