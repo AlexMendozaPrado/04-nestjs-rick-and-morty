@@ -1,7 +1,17 @@
 // src/db/schema.ts
 // adjust schema based on your requirements
-import { pgTable, serial, integer, timestamp } from 'drizzle-orm/pg-core'
-
+import {
+  pgTable,
+  serial,
+  integer,
+  timestamp,
+  varchar,
+} from 'drizzle-orm/pg-core'
+export const users = pgTable('User', {
+  id: serial('id').primaryKey(),
+  email: varchar('email', { length: 64 }),
+  password: varchar('password', { length: 64 }),
+})
 export const favorites = pgTable('favorites', {
   id: serial('id').primaryKey().notNull(),
   characterId: integer('characterId').notNull(),

@@ -20,16 +20,16 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
-"@auth/core@0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@auth/core/-/core-0.31.0.tgz#b2b43a8a1c21dc1065cd15e627a4dc47e3cfcab2"
-  integrity sha512-UKk3psvA1cRbk4/c9CkpWB8mdWrkKvzw0DmEYRsWolUQytQ2cRqx+hYuV6ZCsngw/xbj9hpmkZmAZEyq2g4fMg==
+"@auth/core@0.32.0":
+  version "0.32.0"
+  resolved "https://registry.yarnpkg.com/@auth/core/-/core-0.32.0.tgz#2bc9ba7c52fba798ed46706bbd30d4d5c7021d75"
+  integrity sha512-3+ssTScBd+1fd0/fscAyQN1tSygXzuhysuVVzB942ggU4mdfiTbv36P0ccVnExKWYJKvu3E2r3/zxXCCAmTOrg==
   dependencies:
     "@panva/hkdf" "^1.1.1"
     "@types/cookie" "0.6.0"
     cookie "0.6.0"
     jose "^5.1.3"
-    oauth4webapi "^2.4.0"
+    oauth4webapi "^2.9.0"
     preact "10.11.3"
     preact-render-to-string "5.2.3"
 
@@ -2128,6 +2128,11 @@ balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
+
+bcrypt-ts@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/bcrypt-ts/-/bcrypt-ts-5.0.2.tgz#8068af00de29cc6dce02766c46332158677643e1"
+  integrity sha512-gDwQ5784AkkfhHACh3jGcg1hUubyZyeq9AtVd5gXkcyHGVOC+mORjRIHSj+fHfqwY5vxwyBLXQpcfk8MpK0ROg==
 
 bcrypt@^5.1.1:
   version "5.1.1"
@@ -4718,12 +4723,12 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
-next-auth@^5.0.0-beta.18:
-  version "5.0.0-beta.18"
-  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-5.0.0-beta.18.tgz#4211d0b2bef9e47652cf7388ee85e415e7acfc5d"
-  integrity sha512-x55L8wZb8PcPGCYA3e/l9tdpd7YL3FDuhas4W8pxq3PjrWJ9OoDxNN0otK9axJamJBbBgjfzTJjVQB6hXoe0ZQ==
+next-auth@^5.0.0-beta.19:
+  version "5.0.0-beta.19"
+  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-5.0.0-beta.19.tgz#2f99d8d28c2ee6ee3c6ba48361e482935e267648"
+  integrity sha512-YHu1igcAxZPh8ZB7GIM93dqgY6gcAzq66FOhQFheAdOx1raxNcApt05nNyNCSB6NegSiyJ4XOPsaNow4pfDmsg==
   dependencies:
-    "@auth/core" "0.31.0"
+    "@auth/core" "0.32.0"
 
 next-tick@1, next-tick@^1.1.0:
   version "1.1.0"
@@ -4814,7 +4819,7 @@ nwsapi@^2.2.10:
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.10.tgz#0b77a68e21a0b483db70b11fad055906e867cda8"
   integrity sha512-QK0sRs7MKv0tKe1+5uZIQk/C8XGza4DAnztJG8iD+TpJIORARrCxczA738awHrZoHeTjSSoHqao2teO0dC/gFQ==
 
-oauth4webapi@^2.4.0:
+oauth4webapi@^2.9.0:
   version "2.10.4"
   resolved "https://registry.yarnpkg.com/oauth4webapi/-/oauth4webapi-2.10.4.tgz#4194b784e0ff995edd64bd90177fd7f25b7fbb17"
   integrity sha512-DSoj8QoChzOCQlJkRmYxAJCIpnXFW32R0Uq7avyghIeB6iJq0XAblOD7pcq3mx4WEBDwMuKr0Y1qveCBleG2Xw==
