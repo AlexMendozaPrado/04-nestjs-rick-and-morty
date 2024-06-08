@@ -1,13 +1,24 @@
-export function Form({
-  action,
-  children,
-}: {
-  action: any
+import React, { FormEvent } from 'react'
+
+interface FormProps {
+  action: string
+  onSubmit?: (formData: FormData) => Promise<void>
   children: React.ReactNode
-}) {
+}
+
+export function Form({ action, onSubmit, children }: FormProps) {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    if (onSubmit) {
+      event.preventDefault()
+      const formData = new FormData(event.currentTarget)
+      await onSubmit(formData)
+    }
+  }
+
   return (
     <form
       action={action}
+      onSubmit={handleSubmit}
       className='flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16'
     >
       <div>

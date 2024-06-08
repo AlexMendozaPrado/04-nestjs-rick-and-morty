@@ -13,10 +13,13 @@ export const {
   ...authConfig,
   providers: [
     Credentials({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       async authorize({ email, password }: any) {
         const user = await getUser(email)
         if (user.length === 0) return null
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const passwordsMatch = await compare(password, user[0].password!)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if (passwordsMatch) return user[0] as any
       },
     }),
