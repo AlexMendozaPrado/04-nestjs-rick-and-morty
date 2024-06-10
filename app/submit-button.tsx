@@ -3,23 +3,13 @@
 import React, { useState } from 'react'
 
 export function SubmitButton({ children }: { children: React.ReactNode }) {
-  const [pending, setPending] = useState(false)
-
-  const handleClick = () => {
-    setPending(true)
-    // Simular una solicitud de formulario
-    setTimeout(() => {
-      setPending(false)
-      // Aquí podrías manejar la lógica real del formulario, como enviar los datos
-    }, 2000)
-  }
+  const [pending] = useState(false)
 
   return (
     <button
-      type={pending ? 'button' : 'submit'}
-      aria-disabled={pending}
+      type='submit'
+      disabled={pending}
       className='flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none'
-      onClick={handleClick}
     >
       {children}
       {pending && (

@@ -1,4 +1,4 @@
-import { auth, signOut } from '../auth'
+import { auth, signOut } from '../../auth'
 
 export default async function ProtectedPage() {
   const session = await auth()

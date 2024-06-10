@@ -1,9 +1,11 @@
 'use client'
+
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { ContextoFavorito } from '../context-personajes/page'
 import { MdOutlineArrowBackIosNew } from 'react-icons/md'
 
@@ -11,6 +13,22 @@ export default function Favoritos() {
   const { personajesFavoritos, removerPersonajeFavorito } =
     useContext(ContextoFavorito)
   const cantidadFavoritos = personajesFavoritos.length
+  const { data: session, status } = useSession()
+  console.log('alex', session)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (status === 'loading') return // Wait for session to load
+    if (!session) router.push('/login') // Redirect if no session
+  }, [session, status, router])
+
+  if (status === 'loading') {
+    return <div>Loading...</div> // Show loading message while session is being obtained
+  }
+
+  if (!session) {
+    return null // Do not render anything if no session (avoid flicker)
+  }
 
   return (
     <>

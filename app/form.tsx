@@ -1,58 +1,37 @@
-import React, { FormEvent } from 'react'
+'use client'
+
+import React, { FormEvent, useState } from 'react'
 
 interface FormProps {
-  action: string
-  onSubmit?: (formData: FormData) => Promise<void>
+  action: (formData: FormData) => Promise<any>
   children: React.ReactNode
 }
 
-export function Form({ action, onSubmit, children }: FormProps) {
+export function Form({ action, children }: FormProps) {
+  const [error, setError] = useState<string | null>(null)
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    if (onSubmit) {
-      event.preventDefault()
-      const formData = new FormData(event.currentTarget)
-      await onSubmit(formData)
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+
+    try {
+      await action(formData)
+      setError(null) // Clear error on successful submission
+    } catch (errorMessage) {
+      setError(
+        errorMessage instanceof Error
+          ? errorMessage.message
+          : String(errorMessage),
+      )
     }
   }
 
   return (
     <form
-      action={action}
       onSubmit={handleSubmit}
       className='flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16'
     >
-      <div>
-        <label
-          htmlFor='email'
-          className='block text-xs uppercase text-gray-600'
-        >
-          Email Address
-        </label>
-        <input
-          id='email'
-          name='email'
-          type='email'
-          placeholder='user@acme.com'
-          autoComplete='email'
-          required
-          className='mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm'
-        />
-      </div>
-      <div>
-        <label
-          htmlFor='password'
-          className='block text-xs uppercase text-gray-600'
-        >
-          Password
-        </label>
-        <input
-          id='password'
-          name='password'
-          type='password'
-          required
-          className='mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm'
-        />
-      </div>
+      {error && <p className='text-red-500'>{error}</p>}
       {children}
     </form>
   )

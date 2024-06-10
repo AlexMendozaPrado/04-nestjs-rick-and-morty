@@ -1,35 +1,27 @@
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
+import { compare } from 'bcrypt-ts'
+import { getUser } from './services/useractions'
 import { authConfig } from './auth.config'
-import { z } from 'zod'
-import bcrypt from 'bcrypt'
 
-// ...
-
-export const { auth, signIn, signOut } = NextAuth({
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+} = NextAuth({
   ...authConfig,
   providers: [
     Credentials({
-      credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' },
-      },
-      async authorize(credentials) {
-        const parsedCredentials = z
-          .object({ email: z.string().email(), password: z.string().min(6) })
-          .safeParse(credentials)
-
-        if (parsedCredentials.success) {
-          const { email, password } = parsedCredentials.data
-          const user = await getUser(email)
-          if (!user) return null
-          const passwordsMatch = await bcrypt.compare(password, user.password)
-
-          if (passwordsMatch) return user
-        }
-
-        console.log('Invalid credentials')
-        return null
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      async authorize({ email, password }: any) {
+        const user = await getUser(email)
+        if (user.length === 0) return null
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const passwordsMatch = await compare(password, user[0].password!)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if (passwordsMatch) return user[0] as any
+        console.log('passwordsMatch', passwordsMatch)
       },
     }),
   ],
