@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Image from 'next/image'
 import { BotonFavorito } from './BotonFavorito'
+import { BotonSignOut } from './BotonSignOut'
 
 interface Headerprops {
   esOscuroTemas: boolean
@@ -19,7 +20,7 @@ export default function Header({
       <div className='flex w-full max-w-4xl items-center justify-between gap-2 px-2'>
         <Image src='/logo.png' alt='Rick and Morty' width={180} height={90} />
 
-        <div className='flex w-full max-w-[130px] items-center justify-between gap-2'>
+        <div className='flex items-center gap-2'>
           <BotonFavorito />
           <label className='relative inline-block h-8 w-16 cursor-pointer'>
             <input
@@ -35,6 +36,9 @@ export default function Header({
               ></span>
             </span>
           </label>
+        </div>
+        <div className='flex items-center'>
+          <BotonSignOut />
         </div>
       </div>
     </div>

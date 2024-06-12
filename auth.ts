@@ -10,7 +10,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       async authorize(credentials) {
-        console.log('credentials', credentials)
         const parsedCredentials = z
           .object({ email: z.string().email(), password: z.string().min(6) })
           .safeParse(credentials)
@@ -23,8 +22,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             password,
             user.password as string,
           )
-          console.log('passwordsMatch', passwordsMatch)
-          console.log(['user', user])
 
           if (passwordsMatch) return user
         }

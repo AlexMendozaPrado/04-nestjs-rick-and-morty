@@ -1,6 +1,8 @@
 'use client'
+
 import { useState, useEffect } from 'react'
-import { notFound } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import { RickAndMortyCharactersInfo } from '../../types-ts/rick-and-morty-characters-info'
 import PersonajeClient from './PersonajeClient'
 
@@ -24,12 +26,20 @@ export async function fetchCharacter(
 }
 
 export default function PersonajePage({ params }: PersonajeProps) {
+  const { data: session, status } = useSession()
+  const router = useRouter()
   const [personaje, setPersonaje] = useState<RickAndMortyCharactersInfo | null>(
     null,
   )
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (status === 'loading') return // Wait for session to load
+    if (!session) {
+      router.push('/login') // Redirect if no session
+      return
+    }
+
     async function getCharacter() {
       const character = await fetchCharacter(params.id)
       if (!character) {
@@ -41,9 +51,9 @@ export default function PersonajePage({ params }: PersonajeProps) {
     }
 
     getCharacter()
-  }, [params.id])
+  }, [params.id, session, status, router])
 
-  if (loading) {
+  if (status === 'loading' || loading) {
     return <div>Loading...</div>
   }
 

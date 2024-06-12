@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm'
 import { users, favorites, FavoritesInsert } from '../app/db/schema'
 import { redirect } from 'next/navigation'
 import { db } from '../app/db'
-import { signIn, signOut, auth } from '../auth'
+import { signIn, signOut } from '../auth'
 import { AuthError } from 'next-auth'
 
 export async function getUser(email: string) {
@@ -30,14 +30,13 @@ export async function register(formData: FormData) {
   }
 }
 export const loginAction = async (formData: FormData) => {
-  console.log('formData2', formData)
   try {
     console.log('before sign in')
-    const session = await auth()
-    const value = session
-    console.log('value', value)
-    await signIn('credentials', formData)
-    console.log('sucess', value)
+    await signIn('credentials', {
+      redirectTo: '/',
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+    })
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {

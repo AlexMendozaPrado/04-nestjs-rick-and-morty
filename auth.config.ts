@@ -14,13 +14,12 @@ export const authConfig = {
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      console.log('auth', auth)
       const isLoggedIn = !!auth?.user
-      console.log('isLoggedIn', isLoggedIn)
       if (!isLoggedIn) {
+        // Redirect unauthenticated users to login page
         if (
-          nextUrl.pathname.startsWith('/') ||
-          nextUrl.pathname.startsWith('/register')
+          nextUrl.pathname.startsWith('/') || // Redirect unauthenticated users to login page
+          nextUrl.pathname.startsWith('/register') //
         ) {
           return true
         }
@@ -28,6 +27,7 @@ export const authConfig = {
       }
       return true // Allow authenticated users to access all pages
     },
+
     async jwt({ token, user: jwtUser, trigger }) {
       // Persist the OAuth access_token and or the user id to the token right after signin
       if (trigger === 'signIn') {

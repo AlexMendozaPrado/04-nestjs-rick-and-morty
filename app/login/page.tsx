@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { SubmitButton } from '../submit-button'
 import { loginAction } from '../../services/useractions' // Importar la función loginAction
 import { useSession } from 'next-auth/react'
@@ -10,11 +9,11 @@ import toast from 'react-hot-toast'
 export default function Login() {
   const { data: session } = useSession()
   console.log('session from login page', session)
-  const router = useRouter()
   const clientLoginAction = async (formData: FormData) => {
     const result = await loginAction(formData)
     console.log('result', result)
     if (result) {
+      // Si hay un error, muestra un mensaje de error
       switch (result) {
         case 'Invalid credentials.':
           toast.error('Email or password is not valid.')
@@ -23,9 +22,10 @@ export default function Login() {
           toast.error('Something went wrong. Try again.')
           break
       }
-    } else {
-      router.push('/favoritos')
     }
+    //else { // Si no hay error, redirige a la página de favoritos
+    //router.push('/character/1')
+    // }
   }
 
   return (

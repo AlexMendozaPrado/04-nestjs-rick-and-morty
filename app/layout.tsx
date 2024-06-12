@@ -9,7 +9,6 @@ interface LayoutProps {
 
 export default async function RootLayout({ children }: LayoutProps) {
   const session = await auth() // Obtén la sesión del lado del servidor
-  console.log('session', session)
   return (
     <html lang='en'>
       <body>
