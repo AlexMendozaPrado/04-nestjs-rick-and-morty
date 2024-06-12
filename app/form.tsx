@@ -13,7 +13,7 @@ export function Form({ action, children }: FormProps) {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
-
+    console.log('Form submitted with', formData)
     try {
       await action(formData)
       setError(null) // Clear error on successful submission

@@ -9,19 +9,24 @@ export const authConfig = {
     // added later in auth.ts since it requires bcrypt which is only compatible with Node.js
     // while this file is also used in non-Node.js environments
   ],
+  session: {
+    strategy: 'jwt', // Add this line to set the session strategy to JWT
+  },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
+      console.log('auth', auth)
       const isLoggedIn = !!auth?.user
       console.log('isLoggedIn', isLoggedIn)
       if (!isLoggedIn) {
         if (
-          nextUrl.pathname.startsWith('/login') ||
+          nextUrl.pathname.startsWith('/') ||
           nextUrl.pathname.startsWith('/register')
         ) {
           return true
         }
         return false // Redirect unauthenticated users to login page
       }
+      return true // Allow authenticated users to access all pages
     },
     async jwt({ token, user: jwtUser, trigger }) {
       // Persist the OAuth access_token and or the user id to the token right after signin

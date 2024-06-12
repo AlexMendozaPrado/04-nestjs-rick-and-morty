@@ -5,7 +5,7 @@ import { sql } from '@vercel/postgres'
 import { isProd } from '../const/config'
 
 import { Pool } from 'pg'
-import { dbConfig } from '../../dbConfig'
+import { dbConfig } from '../dbConfig'
 
 export const client = new Pool({
   host: dbConfig.host,
@@ -13,6 +13,7 @@ export const client = new Pool({
   user: dbConfig.user,
   password: dbConfig.password,
   database: dbConfig.database,
+  connectionTimeoutMillis: 30000,
 })
 
 export const db = isProd ? drizzleVercel(sql) : drizzle(client)

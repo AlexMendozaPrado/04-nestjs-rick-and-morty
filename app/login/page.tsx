@@ -1,13 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { Form } from '../form'
 import { useRouter } from 'next/navigation'
 import { SubmitButton } from '../submit-button'
 import { loginAction } from '../../services/useractions' // Importar la función loginAction
+import { useSession } from 'next-auth/react'
 import toast from 'react-hot-toast'
 
 export default function Login() {
+  const { data: session } = useSession()
+  console.log('session from login page', session)
   const router = useRouter()
   const clientLoginAction = async (formData: FormData) => {
     const result = await loginAction(formData)
@@ -35,7 +37,7 @@ export default function Login() {
             Use your email and password to sign in
           </p>
         </div>
-        <Form action={clientLoginAction}>
+        <form action={clientLoginAction}>
           <div>
             <label
               htmlFor='email'
@@ -76,7 +78,7 @@ export default function Login() {
             </Link>
             {' for free.'}
           </p>
-        </Form>
+        </form>
       </div>
     </div>
   )

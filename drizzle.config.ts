@@ -1,5 +1,6 @@
 import { defineConfig } from 'drizzle-kit'
-import { dbConfig } from './dbConfig'
+import { dbConfig } from './app/dbConfig'
+import { isProd } from './app/const/config'
 
 export default defineConfig({
   schema: './app/db/schema.ts',
@@ -10,5 +11,6 @@ export default defineConfig({
     user: dbConfig.user,
     password: dbConfig.password,
     database: dbConfig.database,
+    ssl: isProd,
   },
 })

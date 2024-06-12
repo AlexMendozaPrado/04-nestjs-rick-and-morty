@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Form } from '../form'
 import { SubmitButton } from '../submit-button'
 import { register } from '../../services/useractions'
 
@@ -13,7 +12,7 @@ export default function Register() {
             Create an account with your email and password
           </p>
         </div>
-        <Form action={register}>
+        <form action={register}>
           <div>
             <label
               htmlFor='email'
@@ -54,7 +53,7 @@ export default function Register() {
             </Link>
             {' instead.'}
           </p>
-        </Form>
+        </form>
       </div>
     </div>
   )

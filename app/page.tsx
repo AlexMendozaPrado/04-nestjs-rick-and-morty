@@ -9,6 +9,7 @@ import {
   RickAndMortyCharactersInfo,
   restApiResponseData,
 } from './types-ts/rick-and-morty-characters-info'
+
 import { PersonajeCard } from './components/personajesChard'
 import Head from 'next/head'
 

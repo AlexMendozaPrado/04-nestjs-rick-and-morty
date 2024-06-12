@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '../test-utils'
-import Favoritos from '../page'
+import Favoritos from './page'
 import { describe, it, expect } from 'vitest'
 import { ContextoFavorito } from '../context-personajes/page'
 

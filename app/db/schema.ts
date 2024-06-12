@@ -6,9 +6,10 @@ import {
   integer,
   timestamp,
   varchar,
+  uuid,
 } from 'drizzle-orm/pg-core'
 export const users = pgTable('User', {
-  id: serial('id').primaryKey(),
+  id: uuid('id').defaultRandom().primaryKey(),
   email: varchar('email', { length: 64 }),
   password: varchar('password', { length: 64 }),
 })

@@ -29,7 +29,7 @@
     ".next/types/**/*.ts",
     "tailwind.config.js",
     "drizzle.config.ts",
-    "app/auth.config.ts"
+    "auth.config.ts"
   ],
   "exclude": ["node_modules"]
 }

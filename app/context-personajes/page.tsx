@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, createContext, ReactNode } from 'react'
+import { agregarPersonajeFavoritoDB } from '../../services/useractions'
 
 //Type  de personaje
 import { RickAndMortyCharactersInfo } from '../types-ts/rick-and-morty-characters-info'
@@ -39,6 +40,7 @@ export function ContextoFavoritosProvider({
         'favoritos',
         JSON.stringify([...personajesFavoritos, personaje]),
       )
+      agregarPersonajeFavoritoDB(personaje.id)
     }
   }
   function removerPersonajeFavorito(personajeId: number) {

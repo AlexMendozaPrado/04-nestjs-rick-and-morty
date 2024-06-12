@@ -14,7 +14,7 @@ export default function Favoritos() {
     useContext(ContextoFavorito)
   const cantidadFavoritos = personajesFavoritos.length
   const { data: session, status } = useSession()
-  console.log('alex', session)
+  console.log('sesion info de favs', session)
   const router = useRouter()
 
   useEffect(() => {

@@ -12,7 +12,9 @@ interface PersonajeProps {
   }
 }
 
-export async function fetchCharacter(id: string) {
+export async function fetchCharacter(
+  id: string,
+): Promise<RickAndMortyCharactersInfo | null> {
   const res = await fetch(`${API_URL}/${id}`)
   if (!res.ok) {
     return null
@@ -32,8 +34,9 @@ export default function PersonajePage({ params }: PersonajeProps) {
       const character = await fetchCharacter(params.id)
       if (!character) {
         notFound()
+      } else {
+        setPersonaje(character)
       }
-      setPersonaje(character)
       setLoading(false)
     }
 
