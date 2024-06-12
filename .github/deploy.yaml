@@ -7,7 +7,7 @@ env:
   AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
 on:
   push:
-    branches: main
+    branches: master
     paths-ignore:
       - '**.md'
 jobs:
