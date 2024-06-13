@@ -1,5 +1,5 @@
-// app/page.tsx
 'use client'
+
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
@@ -9,9 +9,10 @@ import {
   RickAndMortyCharactersInfo,
   restApiResponseData,
 } from './types-ts/rick-and-morty-characters-info'
-
 import { PersonajeCard } from './components/personajesChard'
 import Head from 'next/head'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 interface InfoActual {
   count: number
@@ -62,6 +63,14 @@ export default function Home() {
     }
   }
 
+  const { data: session, status } = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (status === 'loading') return // Esperar a que la sesión cargue
+    if (!session) router.push('/login') // Redirigir si no hay sesión
+  }, [session, status, router])
+
   useEffect(() => {
     fetchData(API_URL)
   }, [])
@@ -75,6 +84,14 @@ export default function Home() {
     register,
     formState: { errors },
   } = useForm<infoBusqueda>()
+
+  if (status === 'loading') {
+    return <div>Loading...</div> // Mostrar mensaje de carga mientras se obtiene la sesión
+  }
+
+  if (!session) {
+    return null // No renderizar nada si no hay sesión (evitar parpadeo)
+  }
 
   return (
     <>
